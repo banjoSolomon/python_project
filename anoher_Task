@@ -1,0 +1,2 @@
+number = (input("Enter ten number: " ))
+for number in range 10:

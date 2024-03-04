@@ -1,0 +1,2 @@
+class InvalidPINError(Exception):
+    pass
