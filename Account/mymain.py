@@ -1,6 +1,5 @@
 from Account.account_test import Account
 from Account.bank_test import MyBank
-
 if __name__ == "__main__":
     my_bank = MyBank()
 
@@ -20,52 +19,50 @@ if __name__ == "__main__":
         if choice == "1":
             first_name = input("Enter first name: ")
             last_name = input("Enter last name: ")
-            account_number = int(input("Enter account number: "))
-            new_account = Account(f"{first_name} {last_name}", "correct_pin", 0, account_number)
-            my_bank.add_account(new_account)
-            print("Account added successfully.")
+            try:
+                account_number = int(input("Enter account number: "))
+                new_account = Account(f"{first_name} {last_name}", "correct_pin", 0, account_number)
+                my_bank.add_account(new_account)
+                print("Account added successfully.")
+            except ValueError:
+                print("Invalid input. Account number must be an integer.")
 
-        elif choice == "2":
-            account_name = input("Enter account name: ")
-            deposit_amount = float(input("Enter deposit amount: "))
-            account = my_bank.find_account(account_name)
-            if account:
-                my_bank.deposit(account, deposit_amount)
-                print("Deposit successful.")
-                print(f"New balance for {account.get_name()}: {account.get_balance()}")
-            else:
-                print("Account not found.")
-
-        elif choice == "3":
-            account_name = input("Enter account name: ")
-            withdrawal_amount = float(input("Enter withdrawal amount: "))
-            account = my_bank.find_account(account_name)
-            if account:
-                try:
-                    my_bank.withdraw(account, withdrawal_amount)
-                    print("Withdrawal successful.")
-                    print(f"New balance for {account.get_name()}: {account.get_balance()}")
-                except ValueError as e:
-                    print(f"Error: {e}")
-            else:
-                print("Account not found.")
+        elif choice in ["2", "3"]:
+            action = "Deposit" if choice == "2" else "Withdrawal"
+            account_name = input(f"Enter account name for {action}: ")
+            amount = input(f"Enter {action} amount: ")
+            try:
+                amount = float(amount)
+                account = my_bank.find_account(account_name)
+                if account:
+                    if choice == "2":
+                        my_bank.deposit(account, amount)
+                    else:
+                        my_bank.withdraw(account, amount)
+                    print(f"{action} successful.")
+                    print(f"New balance for {account.get_name()}: {account.get_balance('correct pin')}")
+                else:
+                    print("Account not found.")
+            except ValueError:
+                print("Invalid input. Amount must be a valid number.")
 
         elif choice == "4":
             sender_name = input("Enter sender account name: ")
             receiver_name = input("Enter receiver account name: ")
-            amount = float(input("Enter transfer amount: "))
-            sender = my_bank.find_account(sender_name)
-            receiver = my_bank.find_account(receiver_name)
-            if sender and receiver:
-                try:
+            amount = input("Enter transfer amount: ")
+            try:
+                amount = float(amount)
+                sender = my_bank.find_account(sender_name)
+                receiver = my_bank.find_account(receiver_name)
+                if sender and receiver:
                     my_bank.transfer(sender, receiver, amount)
                     print("Transfer successful.")
-                    print(f"New balance for {sender.get_name()}: {sender.get_balance()}")
-                    print(f"New balance for {receiver.get_name()}: {receiver.get_balance()}")
-                except ValueError as e:
-                    print(f"Error: {e}")
-            else:
-                print("Sender or receiver account not found.")
+                    print(f"New balance for {sender.get_name()}: {sender.get_balance('correct pin')}")
+                    print(f"New balance for {receiver.get_name()}: {receiver.get_balance('correct pin')}")
+                else:
+                    print("Sender or receiver account not found.")
+            except ValueError:
+                print("Invalid input. Amount must be a valid number.")
 
         elif choice == "5":
             print("Customer Count:", my_bank.get_customer_count())
@@ -81,7 +78,7 @@ if __name__ == "__main__":
         elif choice == "7":
             print("\nDisplaying Accounts:")
             for account in my_bank.get_accounts():
-                print(f"Account Name: {account.get_name()}, Balance: {account.get_balance()}")
+                print(f"Account Name: {account.get_name()}, Balance: {account.get_balance('correct pin')}")
 
         elif choice == "8":
             print("Exiting the program. Goodbye!")

@@ -25,3 +25,11 @@ class Test(TestCase):
         task.sum_all_odd_position(numbers)
 
         self.assertEqual(25, task.sum_all_odd_position(numbers))
+
+
+class Test(TestCase):
+    def test_sum_two_numbers(self):
+        numbers = 10
+        numbers1 = 3
+        task.sum_all_number(numbers, numbers1)
+        self.assertEqual(13, task.sum_all_number(numbers, numbers1))
