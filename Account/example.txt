@@ -1,0 +1,4 @@
+01 solomon 500
+02 sam 500
+03 timi 500
+04 john 500

@@ -33,3 +33,11 @@ class Test(TestCase):
         numbers1 = 3
         task.sum_all_number(numbers, numbers1)
         self.assertEqual(13, task.sum_all_number(numbers, numbers1))
+
+class Test(TestCase):
+    def test_all_letters_contains_alphabet(self):
+        letters = "the quick brown fox jumps over the lazy dog"
+        task.all_alphabet(letters)
+        self.assertTrue(letters, task.all_alphabet(letters))
+
+

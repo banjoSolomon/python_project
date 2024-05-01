@@ -27,3 +27,18 @@ print(sum_all_odd_position(my_number))
 
 def sum_all_number(numbers1, numbers2):
     return numbers1 - (-numbers2)
+
+
+def all_alphabet(letters):
+    letters_present = [False] * 26
+    lowercase_words = letters.lower()
+    for ch in lowercase_words:
+        if "a" <= ch <= "z":
+            letters_present[ord(ch) - ord("a")] = True
+    for present in letters_present:
+        if not present:
+            return False
+        else:
+            return True
+
+
