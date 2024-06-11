@@ -1,6 +1,4 @@
-import datetime
 from diary.diaries import Diaries
-from diary.entry import Entry
 from diary.my_diary import Diary
 
 if __name__ == "__main__":
@@ -18,7 +16,6 @@ if __name__ == "__main__":
         diary1 = Diary(user_name1, password1)
         diaries.add_diary(diary1)
 
-
         user_name2 = input("Enter UserName for Diary 2: ")
 
         password2 = ""
@@ -28,7 +25,6 @@ if __name__ == "__main__":
         diary2 = Diary(user_name2, password2)
         diaries.add_diary(diary2)
 
-        # Process Diaries
         diary_list = diaries.get_diaries()
         for diary in diary_list:
             print("Diary Details:")
